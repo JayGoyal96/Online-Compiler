@@ -1,19 +1,19 @@
-import React from 'react';
+import React from "react";
 
 export default function OutputBox({ state, input, results }) {
   return (
     <div
       className={
-        state === 'Uploading...' || state === 'Processing...'
-          ? 'output__box progress'
-          : state === 'error'
-          ? 'output__box error'
-          : 'output__box'
+        state === "Uploading..." || state === "Processing..."
+          ? "output__box progress"
+          : state === "error"
+          ? "output__box error"
+          : "output__box"
       }
     >
       <div className="output__header">Compilation Status</div>
       <div className="output__state">{state != null && state}</div>
-      {state === 'error' && (
+      {state === "error" && (
         <div className="error__box">
           <div className="error__box__header">Message</div>
           <div className="details__box">{results?.output}</div>
@@ -23,7 +23,7 @@ export default function OutputBox({ state, input, results }) {
           </div>
         </div>
       )}
-      {state === 'successful' && (
+      {state === "successful" && (
         <div className="result__box">
           <div className="input__details">
             <div className="header">Input</div>
@@ -36,7 +36,7 @@ export default function OutputBox({ state, input, results }) {
           </div>
 
           <div className="execution__details">
-            Code executed in <span>{results?.time} ms</span> with{' '}
+            Code executed in <span>{results?.time} ms</span> with{" "}
             <span>{results?.memory} bytes</span> of space.
           </div>
         </div>

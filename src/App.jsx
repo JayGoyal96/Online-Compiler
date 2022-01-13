@@ -1,30 +1,30 @@
-import { useState, useEffect } from 'react';
-import 'codemirror/keymap/sublime';
-import 'codemirror/theme/dracula.css';
-import CodeMirror from '@uiw/react-codemirror';
-import { submitCodeToJudge } from './helpers/judge';
-import { playground_samples } from './helpers/constants';
-import CustomInput from './components/CustomInput';
-import EditorHeader from './components/EditorHeader';
-import OutputBox from './components/OutputBox';
+import { useState, useEffect } from "react";
+import { submitCodeToJudge } from "./helpers/judge";
+import { playground_samples } from "./helpers/constants";
+import CustomInput from "./components/CustomInput";
+import EditorHeader from "./components/EditorHeader";
+import OutputBox from "./components/OutputBox";
+import Terminal from "./components/Terminal";
+import Editor from "@monaco-editor/react";
 
 function App() {
-  const [selectedLang, setSelectedLang] = useState('java');
+  const [selectedLang, setSelectedLang] = useState("java");
   const [code, setCode] = useState(
     window.atob(playground_samples[selectedLang])
   );
-  const [customInput, setCustomInput] = useState('');
+  const [customInput, setCustomInput] = useState("");
   const [outputState, setOutputState] = useState(null);
   const [outputData, setOutputData] = useState(null);
+
   useEffect(() => {
     setCode(window.atob(playground_samples[selectedLang]));
   }, [selectedLang]);
 
   const runCode = async () => {
-    console.log('Running Code');
-    setOutputState('Uploading...');
+    // console.log('Running Code');
+    setOutputState("Uploading...");
 
-    setTimeout(() => setOutputState('Processing...'), 1000);
+    setTimeout(() => setOutputState("Processing..."), 1000);
 
     const response = await submitCodeToJudge({
       code: code,
@@ -32,22 +32,22 @@ function App() {
       input: customInput,
     });
 
-    console.log(response);
+    // console.log(response);
 
-    if (response.type === 'ok') {
-      setOutputState('successful');
+    if (response.type === "ok") {
+      setOutputState("successful");
       setOutputData({
         memory: response.memory,
         time: response.time,
         output: response.output,
       });
-    } else if (response.type === 'error') {
-      setOutputState('error');
+    } else if (response.type === "error") {
+      setOutputState("error");
       setOutputData({
         output: response.output,
       });
-    } else if (response.type === 'compilation_error') {
-      setOutputState('error');
+    } else if (response.type === "compilation_error") {
+      setOutputState("error");
       setOutputData({
         output: response.output,
       });
@@ -56,7 +56,7 @@ function App() {
 
   return (
     <div className="container mx-auto">
-      <div className='bg-gray-900'>
+      <div className="bg-gray-900">
         <p className="text-left text-white">Online Complier</p>
       </div>
       <div className="bg-gray-800">
@@ -64,17 +64,16 @@ function App() {
           selectedLang={selectedLang}
           onChange={(e) => setSelectedLang(e)}
         />
-        <CodeMirror
+        <Editor
+          height="80vh"
+          defaultLanguage={selectedLang}
+          theme="vs-dark"
+          defaultValue={code}
+          onChange={(value) => {
+            setCode(value);
+          }}
+          language={selectedLang}
           value={code}
-          options={{
-            theme: 'dracula',
-            keyMap: 'sublime',
-            mode: `${selectedLang}`,
-          }}
-          onChange={(editor, data, value) => {
-            setCode(editor.getValue());
-          }}
-          className="w-96 h-80 overflow-visible"
         />
         <div className="flex justify-between">
           <CustomInput
@@ -93,6 +92,7 @@ function App() {
           />
         )}
       </div>
+      <Terminal />
     </div>
   );
 }

@@ -4,15 +4,19 @@
   "private": true,
   "dependencies": {
     "@craco/craco": "^6.3.0",
+    "@monaco-editor/react": "^4.3.1",
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
-    "@uiw/react-codemirror": "^3.2.1",
     "axios": "^0.21.4",
+    "monaco-editor": "^0.31.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-scripts": "4.0.3",
-    "web-vitals": "^1.0.1"
+    "socket.io-client": "^4.4.1",
+    "web-vitals": "^1.0.1",
+    "xterm": "^4.16.0",
+    "xterm-addon-fit": "^0.5.0"
   },
   "scripts": {
     "start": "craco start",
@@ -24,18 +28,6 @@
     "extends": [
       "react-app",
       "react-app/jest"
-    ]
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
     ]
   },
   "devDependencies": {

@@ -12,7 +12,7 @@ const languageToJudgeID = (lang) => {
     case "python":
       return 71;
 
-    case "js":
+    case "javascript":
       return 63;
 
     default:

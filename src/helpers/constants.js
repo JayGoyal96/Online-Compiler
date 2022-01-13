@@ -2,7 +2,7 @@
 const supported_languages = [
   {
     option: "JavaScript",
-    value: "js",
+    value: "javascript",
   },
   {
     option: "C",
@@ -30,7 +30,9 @@ const playground_samples = {
 
   python: "IyBZb3VyIENvZGUgSGVyZQpwcmludCgiSGVsbG8gQ29kZXJSYW5rIik=",
 
-  
+  javascript: "Y29uc29sZS5sb2coJ0hlbGxvIFdvcmxkIScp",
+
+  c: "I2luY2x1ZGUgPHN0ZGlvLmg+CmludCBtYWluKCkKewogICAgcHJpbnRmKCJIZWxsbyBXb3JsZCIpOwoKICAgIHJldHVybiAwOwp9",
 };
 
 export { supported_languages, playground_samples };
