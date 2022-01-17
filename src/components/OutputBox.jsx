@@ -1,5 +1,4 @@
 import React from "react";
-
 export default function OutputBox({ state, input, results }) {
   return (
     <div

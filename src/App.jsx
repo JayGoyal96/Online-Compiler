@@ -4,8 +4,9 @@ import { playground_samples } from "./helpers/constants";
 import CustomInput from "./components/CustomInput";
 import EditorHeader from "./components/EditorHeader";
 import OutputBox from "./components/OutputBox";
-import Terminal from "./components/Terminal";
 import Editor from "@monaco-editor/react";
+import Loader from "./components/Loader";
+import "./App.css";
 
 function App() {
   const [selectedLang, setSelectedLang] = useState("java");
@@ -21,19 +22,13 @@ function App() {
   }, [selectedLang]);
 
   const runCode = async () => {
-    // console.log('Running Code');
     setOutputState("Uploading...");
-
     setTimeout(() => setOutputState("Processing..."), 1000);
-
     const response = await submitCodeToJudge({
       code: code,
       language: selectedLang,
       input: customInput,
     });
-
-    // console.log(response);
-
     if (response.type === "ok") {
       setOutputState("successful");
       setOutputData({
@@ -56,10 +51,10 @@ function App() {
 
   return (
     <div className="container mx-auto">
-      <div className="bg-gray-900">
+      <div>
         <p className="text-left text-white">Online Complier</p>
       </div>
-      <div className="bg-gray-800">
+      <div>
         <EditorHeader
           selectedLang={selectedLang}
           onChange={(e) => setSelectedLang(e)}
@@ -74,8 +69,12 @@ function App() {
           }}
           language={selectedLang}
           value={code}
+          loading={<Loader />}
+          options={{
+            scrollBeyondLastLine: false,
+          }}
         />
-        <div className="flex justify-between">
+        <div className="flex justify-between text-white">
           <CustomInput
             value={customInput}
             onChange={(e) => setCustomInput(e)}
@@ -84,15 +83,14 @@ function App() {
             Run Code
           </button>
         </div>
-        {outputState != null && (
-          <OutputBox
-            input={customInput}
-            state={outputState}
-            results={outputData}
-          />
-        )}
       </div>
-      <Terminal />
+      {outputState != null && (
+        <OutputBox
+          input={customInput}
+          state={outputState}
+          results={outputData}
+        />
+      )}
     </div>
   );
 }
