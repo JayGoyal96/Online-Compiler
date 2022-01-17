@@ -1,7 +1,7 @@
 const languageToJudgeID = (lang) => {
   switch (lang) {
     case "cpp":
-      return 52;
+      return 54;
 
     case "java":
       return 62;
@@ -25,10 +25,11 @@ const submitCodeToJudge = async ({ code, input, language }) => {
     "https://judge0-extra.p.rapidapi.com/submissions",
     {
       method: "POST",
+      // params: { base64_encoded: "true", wait: "false", fields: "*" },
       headers: {
-        "x-rapidapi-host": "judge0-ce.p.rapidapi.com",
-        "x-rapidapi-key": "e8abaa0200msh59a32d40ecc9995p18b3fejsn889f45871e5c",
         "content-type": "application/json",
+        "x-rapidapi-host": "judge0-ce.p.rapidapi.com",
+        "x-rapidapi-key": "4041bbd049msh5d330b977f1dad1p10455ajsn1069496a1b98",
         accept: "application/json",
       },
       body: JSON.stringify({
@@ -60,7 +61,7 @@ const submitCodeToJudge = async ({ code, input, language }) => {
         headers: {
           "x-rapidapi-host": "judge0-ce.p.rapidapi.com",
           "x-rapidapi-key":
-            "e8abaa0200msh59a32d40ecc9995p18b3fejsn889f45871e5c", // Get yours for free at https://rapidapi.com/hermanzdosilovic/api/judge0
+            "4041bbd049msh5d330b977f1dad1p10455ajsn1069496a1b98", // Get yours for free at https://rapidapi.com/hermanzdosilovic/api/judge0
           "content-type": "application/json",
         },
       });
