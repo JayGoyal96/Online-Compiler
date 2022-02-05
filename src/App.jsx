@@ -52,7 +52,7 @@ function App() {
   return (
     <div className="container mx-auto">
       <div>
-        <p className="text-left text-white">Online Complier</p>
+        <p className="text-left text-white">Online Compiler</p>
       </div>
       <div>
         <EditorHeader
